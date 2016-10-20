@@ -71,7 +71,7 @@ public class GalleryAdapter extends BaseAdapter {
                     ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(images.get(position).getLink());
                     //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, imageDetailsFragment, "details fragment")
+                            .replace(R.id.main_content, imageDetailsFragment, "details fragment")
                             .addToBackStack(null)
                             .commit();
                     //fragmentTransaction.add(imageDetailsFragment, "test");
