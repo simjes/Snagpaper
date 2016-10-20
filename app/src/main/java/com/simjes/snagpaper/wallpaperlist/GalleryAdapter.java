@@ -1,6 +1,10 @@
 package com.simjes.snagpaper.wallpaperlist;
 
+import android.app.Activity;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.simjes.snagpaper.Constants;
 import com.simjes.snagpaper.R;
+import com.simjes.snagpaper.imagedetails.ImageDetailsFragment;
 import com.simjes.snagpaper.models.ImageModel;
 
 import java.util.ArrayList;
@@ -42,7 +47,7 @@ public class GalleryAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         ImageView img;
         if (convertView == null) {
             // If convert is null, then this means we cannot recycle an old view,
@@ -57,6 +62,22 @@ public class GalleryAdapter extends BaseAdapter {
             // value as this maintains the image’s aspect ratio by scaling it in both directions, and then
             // centers the newly-scaled image.
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d(Constants.LOG_TAG, "going to details: " + images.get(position).getLink());
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                    ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(images.get(position).getLink());
+                    //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, imageDetailsFragment, "details fragment")
+                            .addToBackStack(null)
+                            .commit();
+                    //fragmentTransaction.add(imageDetailsFragment, "test");
+                    //fragmentTransaction.commit();
+                }
+            });
         } else {
             // If the view passed to getView is not null, then recycle the view
             img = (ImageView) convertView;
