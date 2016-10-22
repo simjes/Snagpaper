@@ -2,6 +2,7 @@ package com.simjes.snagpaper.imagedetails;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class ImageDetailsFragment extends Fragment {
+public class ImageDetailsFragment extends DialogFragment {
     @BindView(R.id.detailedImageView)
     ImageView imageView;
 
@@ -40,7 +41,9 @@ public class ImageDetailsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imageLink = getArguments().getString(IMAGE_LINK);
+        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

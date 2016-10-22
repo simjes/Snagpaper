@@ -25,11 +25,12 @@ public class ClickImageInListListener implements View.OnClickListener {
         FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
         ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(link);
+        imageDetailsFragment.show(fragmentManager, "imageDetails");
         //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_content, imageDetailsFragment, "details fragment")
+        /*fragmentManager.beginTransaction()
+                .replace(R.id.main_content, imageDetailsFragment, "imageDetailsFragment")
                 .addToBackStack(null)
-                .commit();
+                .commit();*/
         //fragmentTransaction.add(imageDetailsFragment, "test");
         //fragmentTransaction.commit();
     }
