@@ -1,10 +1,6 @@
 package com.simjes.snagpaper.wallpaperlist;
 
-import android.app.Activity;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.simjes.snagpaper.Constants;
-import com.simjes.snagpaper.R;
-import com.simjes.snagpaper.imagedetails.ImageDetailsFragment;
+import com.simjes.snagpaper.listeners.ClickImageInListListener;
 import com.simjes.snagpaper.models.ImageModel;
 
 import java.util.ArrayList;
@@ -37,8 +32,8 @@ public class GalleryAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public ImageModel getItem(int i) {
+        return images.get(i);
     }
 
     @Override
@@ -62,32 +57,15 @@ public class GalleryAdapter extends BaseAdapter {
             // value as this maintains the image’s aspect ratio by scaling it in both directions, and then
             // centers the newly-scaled image.
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d(Constants.LOG_TAG, "going to details: " + images.get(position).getLink());
-                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
-
-                    ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(images.get(position).getLink());
-                    //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.main_content, imageDetailsFragment, "details fragment")
-                            .addToBackStack(null)
-                            .commit();
-                    //fragmentTransaction.add(imageDetailsFragment, "test");
-                    //fragmentTransaction.commit();
-                }
-            });
         } else {
             // If the view passed to getView is not null, then recycle the view
             img = (ImageView) convertView;
+
         }
 
-        // Use the position integer to select an image from the gridviewImages array, and set it to the
-        // ImageView we just created
-        //TODO: image not found
-        Glide.with(context).load(images.get(position).getLink()).into(img);
-        //img.setImageResource(gridviewImages[position]);
+        img.setOnClickListener(new ClickImageInListListener(context, getItem(position).getLink()));
+        //TODO: image not found .error()
+        Glide.with(context).load(getItem(position).getLink()).into(img);
         return img;
     }
 
