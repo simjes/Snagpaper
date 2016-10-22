@@ -11,19 +11,21 @@ import com.simjes.snagpaper.imagedetails.ImageDetailsFragment;
 
 public class ClickImageInListListener implements View.OnClickListener {
     private Context context;
-    private String link;
+    private String imageLink;
+    private String imageName;
 
-    public ClickImageInListListener(Context context, String link) {
+    public ClickImageInListListener(Context context, String imageLink, String imageName) {
         this.context = context;
-        this.link = link;
+        this.imageLink = imageLink;
+        this.imageName = imageName;
     }
 
     @Override
     public void onClick(View view) {
-        Log.d(Constants.LOG_TAG, "going to details: " + link);
+        Log.d(Constants.LOG_TAG, "going to details: " + imageLink);
         FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
-        ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(link);
+        ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(imageLink, imageName);
         imageDetailsFragment.show(fragmentManager, "imageDetails");
     }
 }

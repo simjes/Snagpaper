@@ -2,6 +2,7 @@ package com.simjes.snagpaper;
 
 public class Constants {
     public static final String LOG_TAG = "imgurapp";
+    public static final String PICTURE_DIR = "Snagpaper";
 
     private static final String MY_IMGUR_CLIENT_ID = "";
     public static final String MY_IMGUR_CLIENT_SECRET = "";

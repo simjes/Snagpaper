@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.simjes.snagpaper.R;
+import com.simjes.snagpaper.listeners.SaveButtonClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,15 +29,18 @@ public class ImageDetailsFragment extends DialogFragment {
 
     private Unbinder unbinder;
     private static final String IMAGE_LINK = "imageLink";
+    private static final String IMAGE_NAME = "imageName";
     private String imageLink;
+    private String imageName;
 
     public ImageDetailsFragment() {
     }
 
-    public static ImageDetailsFragment newInstance(String imageLink) {
+    public static ImageDetailsFragment newInstance(String imageLink, String imageName) {
         ImageDetailsFragment fragment = new ImageDetailsFragment();
         Bundle args = new Bundle();
         args.putString(IMAGE_LINK, imageLink);
+        args.putString(IMAGE_NAME, imageName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,6 +49,7 @@ public class ImageDetailsFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imageLink = getArguments().getString(IMAGE_LINK);
+        imageName = getArguments().getString(IMAGE_NAME);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
 
@@ -62,6 +67,7 @@ public class ImageDetailsFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        saveButton.setOnClickListener(new SaveButtonClickListener(getContext(), imageLink, imageName));
         Glide.with(getContext()).load(imageLink).into(imageView);
     }
 
