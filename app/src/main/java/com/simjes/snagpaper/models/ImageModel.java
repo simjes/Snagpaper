@@ -3,16 +3,16 @@ package com.simjes.snagpaper.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ImageModel {
+import io.realm.RealmObject;
+
+
+public class ImageModel extends RealmObject {
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("title")
     @Expose
     private String title;
-    @SerializedName("description")
-    @Expose
-    private Object description;
     @SerializedName("datetime")
     @Expose
     private Long datetime;
@@ -37,9 +37,6 @@ public class ImageModel {
     @SerializedName("bandwidth")
     @Expose
     private Long bandwidth;
-    @SerializedName("vote")
-    @Expose
-    private Object vote;
     @SerializedName("favorite")
     @Expose
     private Boolean favorite;
@@ -123,14 +120,6 @@ public class ImageModel {
         this.title = title;
     }
 
-    public Object getDescription() {
-        return description;
-    }
-
-    public void setDescription(Object description) {
-        this.description = description;
-    }
-
     public Long getDatetime() {
         return datetime;
     }
@@ -193,14 +182,6 @@ public class ImageModel {
 
     public void setBandwidth(Long bandwidth) {
         this.bandwidth = bandwidth;
-    }
-
-    public Object getVote() {
-        return vote;
-    }
-
-    public void setVote(Object vote) {
-        this.vote = vote;
     }
 
     public Boolean getFavorite() {

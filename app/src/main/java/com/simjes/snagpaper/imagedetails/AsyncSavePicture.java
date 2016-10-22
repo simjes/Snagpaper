@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.concurrent.ExecutionException;
 
-
+//TODO: change to RxJava?
 public class AsyncSavePicture extends AsyncTask<String, Void, Boolean> {
     private Context context;
 
@@ -52,8 +52,6 @@ public class AsyncSavePicture extends AsyncTask<String, Void, Boolean> {
         } else {
             Toast.makeText(context, "Could not save image", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     private boolean isExternalStorageWritable() {
@@ -69,6 +67,4 @@ public class AsyncSavePicture extends AsyncTask<String, Void, Boolean> {
         }
         return file.getAbsolutePath();
     }
-
-
 }

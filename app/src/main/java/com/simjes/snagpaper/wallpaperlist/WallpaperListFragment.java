@@ -34,8 +34,6 @@ public class WallpaperListFragment extends Fragment {
 
     private GalleryAdapter galleryAdapter;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
     public WallpaperListFragment() {
     }
 
@@ -43,12 +41,8 @@ public class WallpaperListFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static WallpaperListFragment newInstance(int sectionNumber) {
-        WallpaperListFragment fragment = new WallpaperListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+    public static WallpaperListFragment newInstance() {
+        return new WallpaperListFragment();
     }
 
     @Override
@@ -56,15 +50,13 @@ public class WallpaperListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.wallpaper_list, container, false);
         unbinder = ButterKnife.bind(this, rootView);
-        //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        galleryAdapter = new GalleryAdapter(getContext()); //needs fix?
+        galleryAdapter = new GalleryAdapter(getContext());
         galleryBox.setAdapter(galleryAdapter);
         getNewImages(1);
         galleryBox.setOnScrollListener(new EndlessScrollListener() {

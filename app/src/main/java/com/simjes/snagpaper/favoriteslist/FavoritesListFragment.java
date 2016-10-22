@@ -35,21 +35,12 @@ public class FavoritesListFragment extends Fragment {
 
     private GalleryAdapter galleryAdapter;
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
 
     public FavoritesListFragment() {
     }
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static FavoritesListFragment newInstance(int sectionNumber) {
-        FavoritesListFragment fragment = new FavoritesListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
+    public static FavoritesListFragment newInstance() {
+        return new FavoritesListFragment();
     }
 
     @Override

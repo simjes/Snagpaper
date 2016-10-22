@@ -17,11 +17,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return WallpaperListFragment.newInstance(position + 1);
+                return WallpaperListFragment.newInstance();
             case 1:
-                return FavoritesListFragment.newInstance(position + 1);
+                return FavoritesListFragment.newInstance();
             default:
-                return WallpaperListFragment.newInstance(position + 1);
+                return WallpaperListFragment.newInstance();
         }
     }
 
