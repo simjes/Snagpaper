@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -12,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:contentDescription="Detailed image" />
+        android:contentDescription="@string/detailed_image_description" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,17 +20,19 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/saveButtonDetails"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="SAVE" />
+            android:text="@string/save_button_text" />
 
         <Button
+            android:id="@+id/favoriteButtonDetails"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="FAVORITE" />
+            android:text="@string/favorite_button_text" />
     </LinearLayout>
 </RelativeLayout>

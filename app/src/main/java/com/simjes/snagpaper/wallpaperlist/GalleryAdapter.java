@@ -65,7 +65,7 @@ public class GalleryAdapter extends BaseAdapter {
 
         img.setOnClickListener(new ClickImageInListListener(context, getItem(position).getLink()));
         //TODO: image not found .error()
-        Glide.with(context).load(getItem(position).getLink()).into(img);
+        Glide.with(context).load(getItem(position).getLink()).asBitmap().thumbnail(0.5f).into(img);
         return img;
     }
 

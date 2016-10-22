@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 
 import com.simjes.snagpaper.Constants;
-import com.simjes.snagpaper.R;
 import com.simjes.snagpaper.imagedetails.ImageDetailsFragment;
 
 public class ClickImageInListListener implements View.OnClickListener {
@@ -26,12 +25,5 @@ public class ClickImageInListListener implements View.OnClickListener {
 
         ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(link);
         imageDetailsFragment.show(fragmentManager, "imageDetails");
-        //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-        /*fragmentManager.beginTransaction()
-                .replace(R.id.main_content, imageDetailsFragment, "imageDetailsFragment")
-                .addToBackStack(null)
-                .commit();*/
-        //fragmentTransaction.add(imageDetailsFragment, "test");
-        //fragmentTransaction.commit();
     }
 }

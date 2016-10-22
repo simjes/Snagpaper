@@ -3,15 +3,13 @@ package com.simjes.snagpaper.imagedetails;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.simjes.snagpaper.Constants;
 import com.simjes.snagpaper.R;
 
 import butterknife.BindView;
@@ -21,6 +19,12 @@ import butterknife.Unbinder;
 public class ImageDetailsFragment extends DialogFragment {
     @BindView(R.id.detailedImageView)
     ImageView imageView;
+
+    @BindView(R.id.saveButtonDetails)
+    Button saveButton;
+
+    @BindView(R.id.favoriteButtonDetails)
+    Button favoriteButton;
 
     private Unbinder unbinder;
     private static final String IMAGE_LINK = "imageLink";
@@ -52,7 +56,6 @@ public class ImageDetailsFragment extends DialogFragment {
         unbinder = ButterKnife.bind(this, rootView);
         //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
         //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
         return rootView;
     }
 
