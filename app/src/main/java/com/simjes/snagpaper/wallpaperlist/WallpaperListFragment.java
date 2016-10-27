@@ -37,10 +37,6 @@ public class WallpaperListFragment extends Fragment {
     public WallpaperListFragment() {
     }
 
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
     public static WallpaperListFragment newInstance() {
         return new WallpaperListFragment();
     }

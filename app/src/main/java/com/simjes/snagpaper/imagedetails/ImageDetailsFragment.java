@@ -3,6 +3,7 @@ package com.simjes.snagpaper.imagedetails;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.simjes.snagpaper.R;
 import com.simjes.snagpaper.listeners.FavoriteButtonClickListener;
 import com.simjes.snagpaper.listeners.SaveButtonClickListener;
 import com.simjes.snagpaper.models.ImageModel;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,12 +37,16 @@ public class ImageDetailsFragment extends DialogFragment {
     private Unbinder unbinder;
     private ImageModel image;
 
-    public static ImageDetailsFragment newInstance() {
-        return new ImageDetailsFragment();
+    public static ImageDetailsFragment newInstance(ImageModel image) {
+        ImageDetailsFragment imageDetailsFragment = new ImageDetailsFragment();
+        Bundle fragmentArgs = new Bundle();
+        fragmentArgs.putParcelable("image_details", Parcels.wrap(image));
+        imageDetailsFragment.setArguments(fragmentArgs);
+        return imageDetailsFragment;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
@@ -53,8 +60,10 @@ public class ImageDetailsFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Bundle fragmentArguments = getArguments();
+        image = Parcels.unwrap(fragmentArguments.getParcelable("image_details"));
         saveButton.setOnClickListener(new SaveButtonClickListener(getContext(), image.getLink(), image.getDatetime().toString()));
         favoriteButton.setOnClickListener(new FavoriteButtonClickListener(image));
         Glide.with(getContext()).load(image.getLink()).into(imageView);
@@ -65,10 +74,4 @@ public class ImageDetailsFragment extends DialogFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
-
-    //TODO: parcable, eventbus?
-    public void setImage(ImageModel image) {
-        this.image = image;
-    }
-
 }

@@ -3,9 +3,11 @@ package com.simjes.snagpaper.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
 
-
+@Parcel(Parcel.Serialization.BEAN)
 public class ImageModel extends RealmObject {
     @SerializedName("id")
     @Expose
@@ -103,6 +105,9 @@ public class ImageModel extends RealmObject {
     @SerializedName("images_count")
     @Expose
     private Long imagesCount;
+
+    public ImageModel() {
+    }
 
     public String getId() {
         return id;

@@ -24,8 +24,8 @@ public class ClickImageInListListener implements View.OnClickListener {
         Log.d(Constants.LOG_TAG, "going to details: " + image.getLink());
         FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
 
-        ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance();
-        imageDetailsFragment.setImage(image);
+        ImageDetailsFragment imageDetailsFragment = ImageDetailsFragment.newInstance(image);
+        //imageDetailsFragment.setImage(image);
         imageDetailsFragment.show(fragmentManager, "imageDetails");
     }
 }
