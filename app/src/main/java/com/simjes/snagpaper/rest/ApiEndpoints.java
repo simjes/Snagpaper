@@ -8,6 +8,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Path;
 
 public interface ApiEndpoints {
-    @GET("3/gallery/t/wallpaper/{page}")
+    @GET("3/gallery/t/wallpaper/time/{page}")
     Call<ImgurResponse> getPictures(@Header("Authorization") String clientId, @Path("page") int page);
 }
