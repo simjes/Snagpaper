@@ -1,13 +1,14 @@
 package com.simjes.snagpaper.listeners;
 
-import android.util.Log;
 import android.view.View;
 
-import com.simjes.snagpaper.Constants;
 import com.simjes.snagpaper.models.ImageModel;
+
+import io.realm.Realm;
 
 public class FavoriteButtonClickListener implements View.OnClickListener {
     private ImageModel image;
+    private Realm realmDatabase;
 
     public FavoriteButtonClickListener(ImageModel image) {
         this.image = image;
@@ -15,8 +16,16 @@ public class FavoriteButtonClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Log.d(Constants.LOG_TAG, "hello from favorite button click");
+        realmDatabase = Realm.getDefaultInstance();
+        realmDatabase.beginTransaction();
+        ImageModel imageInDatabase = realmDatabase.where(ImageModel.class).equalTo("link", image.getLink()).findFirst();
+        if(imageInDatabase == null) {
+            realmDatabase.copyToRealm(image);
+        } else {
+            imageInDatabase.deleteFromRealm();
+        }
+        realmDatabase.commitTransaction();
+
+        //TODO: notify data change in favorite fragment
     }
 }
-
-//TODO: favorite indicator in list and in detailed view?

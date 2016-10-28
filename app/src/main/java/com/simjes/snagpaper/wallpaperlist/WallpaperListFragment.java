@@ -1,8 +1,6 @@
 package com.simjes.snagpaper.wallpaperlist;
 
-import android.media.Image;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +28,9 @@ import retrofit2.Response;
 public class WallpaperListFragment extends Fragment {
     @BindView(R.id.galleryBox)
     GridView galleryBox;
+
     private Unbinder unbinder;
+
 
     private GalleryAdapter galleryAdapter;
 
@@ -42,6 +42,11 @@ public class WallpaperListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.wallpaper_list, container, false);
@@ -50,7 +55,7 @@ public class WallpaperListFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         galleryAdapter = new GalleryAdapter(getContext());
         galleryBox.setAdapter(galleryAdapter);

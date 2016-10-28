@@ -24,6 +24,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,7 +34,9 @@ import retrofit2.Response;
 public class FavoritesListFragment extends Fragment {
     @BindView(R.id.galleryBox)
     GridView galleryBox;
+
     private Unbinder unbinder;
+    private Realm realmDatabase;
 
     private GalleryAdapter galleryAdapter;
 
@@ -41,6 +46,12 @@ public class FavoritesListFragment extends Fragment {
 
     public static FavoritesListFragment newInstance() {
         return new FavoritesListFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        realmDatabase = Realm.getDefaultInstance();
     }
 
     @Override
@@ -54,18 +65,11 @@ public class FavoritesListFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*galleryAdapter = new GalleryAdapter(getContext()); //needs fix?
+        galleryAdapter = new GalleryAdapter(getContext());
         galleryBox.setAdapter(galleryAdapter);
-        getNewImages(1);
-        galleryBox.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public boolean onLoadMore(int offset, int totalItemsCount) {
-                getNewImages(offset);
-                return true;
-            }
-        });*/
+        getFavoritePictures();
     }
 
     @Override
@@ -74,31 +78,10 @@ public class FavoritesListFragment extends Fragment {
         unbinder.unbind();
     }
 
-    /*private void getNewImages(int page) {
-        Call<ImgurResponse> call = ApiClient.get().getPictures(Constants.getClientAuth(), page);
-        call.enqueue(new Callback<ImgurResponse>() {
-            @Override
-            public void onResponse(Call<ImgurResponse> call, Response<ImgurResponse> response) {
-                Log.d(Constants.LOG_TAG, "successful repsonese");
-                ImgurResponse imgurResponse = response.body();
-                galleryAdapter.addNewPictures(filterValidImages(imgurResponse.getData().getImages()));
-            }
-
-            @Override
-            public void onFailure(Call<ImgurResponse> call, Throwable t) {
-                Log.d(Constants.LOG_TAG, "failed repsonese");
-                Log.e(Constants.LOG_TAG, t.toString());
-            }
-        });
-    }
-
-    private List<ImageModel> filterValidImages(List<ImageModel> imageList) {
-        List<ImageModel> validImages = new ArrayList<>();
-        for (ImageModel img : imageList) {
-            if (!img.getIsAlbum() && !img.getNsfw()) {
-                validImages.add(img);
-            }
+    private void getFavoritePictures() {
+        List<ImageModel> favoriteImages = realmDatabase.where(ImageModel.class).findAll();
+        if (favoriteImages.size() > 0) {
+            galleryAdapter.addNewPictures(favoriteImages);
         }
-        return validImages;
-    }*/
+    }
 }

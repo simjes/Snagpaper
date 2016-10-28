@@ -23,6 +23,9 @@ android {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+    }
 }
 
 dependencies {
@@ -38,6 +41,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:support-v4:25.0.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
+    compile 'com.facebook.stetho:stetho:1.4.1'
+    compile 'com.uphyca:stetho_realm:2.0.0'
     compile 'org.parceler:parceler-api:1.1.1'
     apt 'org.parceler:parceler:1.1.1'
     compile 'com.jakewharton:butterknife:8.2.1'

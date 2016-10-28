@@ -5,9 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import io.realm.ImageModelRealmProxy;
 import io.realm.RealmObject;
 
-@Parcel(Parcel.Serialization.BEAN)
+@Parcel(implementations = { ImageModelRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { ImageModel.class })
 public class ImageModel extends RealmObject {
     @SerializedName("id")
     @Expose

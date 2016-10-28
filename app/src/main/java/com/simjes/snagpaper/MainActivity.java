@@ -9,6 +9,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.stetho.Stetho;
+import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -18,6 +24,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Realm.init(this);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(realmConfig);
+
+        //debugger
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+                        .build());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -31,10 +48,13 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Realm.getDefaultInstance().close();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
