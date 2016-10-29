@@ -16,7 +16,7 @@ import com.simjes.snagpaper.models.ImageModel;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//TODO: not use baseadapter?
 public class GalleryAdapter extends BaseAdapter {
     private Context context;
     private List<ImageModel> images;
@@ -74,5 +74,15 @@ public class GalleryAdapter extends BaseAdapter {
         images.addAll(newImages);
         Log.d(Constants.LOG_TAG, "images: " + images.size());
         this.notifyDataSetChanged();
+    }
+
+    public void removeImageFromList(ImageModel image) {
+        images.remove(image);
+        notifyDataSetChanged();
+    }
+
+    public void addImageToList(ImageModel image) {
+        images.add(image);
+        notifyDataSetChanged();
     }
 }

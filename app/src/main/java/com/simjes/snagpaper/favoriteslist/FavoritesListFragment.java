@@ -25,11 +25,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class FavoritesListFragment extends Fragment {
     @BindView(R.id.galleryBox)
@@ -82,6 +77,14 @@ public class FavoritesListFragment extends Fragment {
         List<ImageModel> favoriteImages = realmDatabase.where(ImageModel.class).findAll();
         if (favoriteImages.size() > 0) {
             galleryAdapter.addNewPictures(favoriteImages);
+        }
+    }
+
+    public void updateList(ImageModel image, boolean addNew) {
+        if (addNew) {
+            galleryAdapter.addImageToList(image);
+        } else {
+            galleryAdapter.removeImageFromList(image);
         }
     }
 }

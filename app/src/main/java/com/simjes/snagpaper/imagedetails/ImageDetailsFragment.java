@@ -65,7 +65,7 @@ public class ImageDetailsFragment extends DialogFragment {
         Bundle fragmentArguments = getArguments();
         image = Parcels.unwrap(fragmentArguments.getParcelable("image_details"));
         saveButton.setOnClickListener(new SaveButtonClickListener(getContext(), image.getLink(), image.getDatetime().toString()));
-        favoriteButton.setOnClickListener(new FavoriteButtonClickListener(image));
+        favoriteButton.setOnClickListener(new FavoriteButtonClickListener(image, getActivity()));
         Glide.with(getContext()).load(image.getLink()).into(imageView);
     }
 
